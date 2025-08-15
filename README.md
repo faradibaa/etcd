@@ -1,3 +1,10 @@
+# Pre-Setup
+Create directory to store etcd data and change the permission to 775.
+```
+mkdir -p etcd-data
+chmod -R 775 etcd-data
+```
+
 # Some Useful ETCD Commands
 ```
 etcdctl version
