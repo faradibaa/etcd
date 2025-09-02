@@ -1,0 +1,190 @@
+services:
+
+  cluster1-etcd1:
+    image: bitnami/etcd:latest
+    container_name: cluster1-etcd1
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    volumes:
+      - ./cluster1-etcd1-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C1_ETCD_NAME1}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C1_CLIENT_PORT1}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C1_IP_1}:${C1_CLIENT_PORT1}
+      - ETCD_INITIAL_CLUSTER=${C1_ETCD_NAME1}=http://${C1_IP_1}:${C1_PEER_PORT1},${C1_ETCD_NAME2}=http://${C1_IP_2}:${C1_PEER_PORT2},${C1_ETCD_NAME3}=http://${C1_IP_3}:${C1_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C1_PEER_PORT1}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C1_IP_1}:${C1_PEER_PORT1}
+
+  cluster1-etcd2:
+    image: bitnami/etcd:latest
+    container_name: cluster1-etcd2
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "2479:2479"
+      - "2480:2480"
+    volumes:
+      - ./cluster1-etcd2-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C1_ETCD_NAME2}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C1_CLIENT_PORT2}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C1_IP_2}:${C1_CLIENT_PORT2}
+      - ETCD_INITIAL_CLUSTER=${C1_ETCD_NAME1}=http://${C1_IP_1}:${C1_PEER_PORT1},${C1_ETCD_NAME2}=http://${C1_IP_2}:${C1_PEER_PORT2},${C1_ETCD_NAME3}=http://${C1_IP_3}:${C1_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C1_PEER_PORT2}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C1_IP_2}:${C1_PEER_PORT2}
+
+  cluster1-etcd3:
+    image: bitnami/etcd:latest
+    container_name: cluster1-etcd3
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "2579:2579"
+      - "2580:2580"
+    volumes:
+      - ./cluster1-etcd3-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C1_ETCD_NAME3}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C1_CLIENT_PORT3}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C1_IP_3}:${C1_CLIENT_PORT3}
+      - ETCD_INITIAL_CLUSTER=${C1_ETCD_NAME1}=http://${C1_IP_1}:${C1_PEER_PORT1},${C1_ETCD_NAME2}=http://${C1_IP_2}:${C1_PEER_PORT2},${C1_ETCD_NAME3}=http://${C1_IP_3}:${C1_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C1_PEER_PORT3}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C1_IP_3}:${C1_PEER_PORT3}
+
+  cluster2-etcd1:
+    image: bitnami/etcd:latest
+    container_name: cluster2-etcd1
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "3379:3379"
+      - "3380:3380"
+    volumes:
+      - ./cluster2-etcd1-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C2_ETCD_NAME1}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C2_CLIENT_PORT1}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C2_IP_1}:${C2_CLIENT_PORT1}
+      - ETCD_INITIAL_CLUSTER=${C2_ETCD_NAME1}=http://${C2_IP_1}:${C2_PEER_PORT1},${C2_ETCD_NAME2}=http://${C2_IP_2}:${C2_PEER_PORT2},${C2_ETCD_NAME3}=http://${C2_IP_3}:${C2_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C2_PEER_PORT1}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C2_IP_1}:${C2_PEER_PORT1}
+
+  cluster2-etcd2:
+    image: bitnami/etcd:latest
+    container_name: cluster2-etcd2
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "3479:3479"
+      - "3480:3480"
+    volumes:
+      - ./cluster2-etcd2-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C2_ETCD_NAME2}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C2_CLIENT_PORT2}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C2_IP_2}:${C2_CLIENT_PORT2}
+      - ETCD_INITIAL_CLUSTER=${C2_ETCD_NAME1}=http://${C2_IP_1}:${C2_PEER_PORT1},${C2_ETCD_NAME2}=http://${C2_IP_2}:${C2_PEER_PORT2},${C2_ETCD_NAME3}=http://${C2_IP_3}:${C2_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C2_PEER_PORT2}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C2_IP_2}:${C2_PEER_PORT2}
+
+  cluster2-etcd3:
+    image: bitnami/etcd:latest
+    container_name: cluster2-etcd3
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "3579:3579"
+      - "3580:3580"
+    volumes:
+      - ./cluster2-etcd3-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C2_ETCD_NAME3}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C2_CLIENT_PORT3}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C2_IP_3}:${C2_CLIENT_PORT3}
+      - ETCD_INITIAL_CLUSTER=${C2_ETCD_NAME1}=http://${C2_IP_1}:${C2_PEER_PORT1},${C2_ETCD_NAME2}=http://${C2_IP_2}:${C2_PEER_PORT2},${C2_ETCD_NAME3}=http://${C2_IP_3}:${C2_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C2_PEER_PORT3}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C2_IP_3}:${C2_PEER_PORT3}
+
+  cluster3-etcd1:
+    image: bitnami/etcd:latest
+    container_name: cluster3-etcd1
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "4379:4379"
+      - "4380:4380"
+    volumes:
+      - ./cluster3-etcd1-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C3_ETCD_NAME1}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C3_CLIENT_PORT1}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C3_IP_1}:${C3_CLIENT_PORT1}
+      - ETCD_INITIAL_CLUSTER=${C3_ETCD_NAME1}=http://${C3_IP_1}:${C3_PEER_PORT1},${C3_ETCD_NAME2}=http://${C3_IP_2}:${C3_PEER_PORT2},${C3_ETCD_NAME3}=http://${C3_IP_3}:${C3_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C3_PEER_PORT1}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C3_IP_1}:${C3_PEER_PORT1}
+
+  cluster3-etcd2:
+    image: bitnami/etcd:latest
+    container_name: cluster3-etcd2
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "4479:4479"
+      - "4480:4480"
+    volumes:
+      - ./cluster3-etcd2-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C3_ETCD_NAME2}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C3_CLIENT_PORT2}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C3_IP_2}:${C3_CLIENT_PORT2}
+      - ETCD_INITIAL_CLUSTER=${C3_ETCD_NAME1}=http://${C3_IP_1}:${C3_PEER_PORT1},${C3_ETCD_NAME2}=http://${C3_IP_2}:${C3_PEER_PORT2},${C3_ETCD_NAME3}=http://${C3_IP_3}:${C3_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C3_PEER_PORT2}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C3_IP_2}:${C3_PEER_PORT2}
+
+  cluster3-etcd3:
+    image: bitnami/etcd:latest
+    container_name: cluster3-etcd3
+    network_mode: default
+    restart: unless-stopped
+    ports:
+      - "4579:4579"
+      - "4580:4580"
+    volumes:
+      - ./cluster3-etcd3-data:/bitnami/etcd/data
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_LOG_LEVEL=debug
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_NAME=${C3_ETCD_NAME3}
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:${C3_CLIENT_PORT3}
+      - ETCD_ADVERTISE_CLIENT_URLS=http://${C3_IP_3}:${C3_CLIENT_PORT3}
+      - ETCD_INITIAL_CLUSTER=${C3_ETCD_NAME1}=http://${C3_IP_1}:${C3_PEER_PORT1},${C3_ETCD_NAME2}=http://${C3_IP_2}:${C3_PEER_PORT2},${C3_ETCD_NAME3}=http://${C3_IP_3}:${C3_PEER_PORT3}
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:${C3_PEER_PORT3}
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://${C3_IP_3}:${C3_PEER_PORT3}
